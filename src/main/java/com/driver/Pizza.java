@@ -25,12 +25,12 @@ public class Pizza {
         if(isVeg){
             price = vegBasePrice;
             toppings = toppingsPriceVeg;
-            total += vegBasePrice;
+            total = vegBasePrice;
         }
         else{
             price = nonVegBasePrice;
             toppings = toppingsPriceNonVeg;
-            total += nonVegBasePrice;
+            total = nonVegBasePrice;
         }
     }
 
@@ -39,21 +39,21 @@ public class Pizza {
     }
 
     public void addExtraCheese(){
-        if(!cheeseAdded){
+        if(cheeseAdded == false){
             total += cheesePrice;
             cheeseAdded = true;
         }
     }
 
     public void addExtraToppings(){
-        if(!toppingsAdded){
+        if(toppingsAdded == false){
             total += toppings;
             toppingsAdded = true;
         }
     }
 
     public void addTakeaway(){
-        if(!bagAdded){
+        if(bagAdded == false){
             total += bagPrice;
             bagAdded = true;
         }
@@ -61,12 +61,15 @@ public class Pizza {
 
     public String getBill(){
         bill = "Base Price Of The Pizza: "+price+"\n";
-        if(cheeseAdded)
-        bill = bill + "Extra Cheese Added: "+cheesePrice+"\n";
-        if(toppingsAdded)
-        bill = bill + "Extra Toppings Added: "+toppings+"\n";
-        if(bagAdded)
-        bill = bill + "Paperbag Added: "+bagPrice+"\n";
+        if(cheeseAdded) {
+            bill = bill + "Extra Cheese Added: " + cheesePrice + "\n";
+        }
+        if(toppingsAdded) {
+            bill = bill + "Extra Toppings Added: " + toppings + "\n";
+        }
+        if(bagAdded) {
+            bill = bill + "Paperbag Added: " + bagPrice + "\n";
+        }
 
         bill = bill + "Total Price: "+total;
 
