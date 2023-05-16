@@ -6,32 +6,28 @@ public class Pizza {
     private Boolean isVeg;
     private String bill;
 
-    private int total;
+    private int basePrice;
     private int toppings;
-    final int vegBasePrice = 300;
-    final int nonVegBasePrice = 400;
-    final int cheesePrice = 80;
-    final int toppingsPriceVeg = 70;
-    final int toppingsPriceNonVeg = 120;
-    final int bagPrice = 20;
+    private final int vegBasePrice = 300;
+    private final int nonVegBasePrice = 400;
+    private final int cheesePrice = 80;
+    private final int toppingsPriceVeg = 70;
+    private final int toppingsPriceNonVeg = 120;
+    private final int bagPrice = 20;
 
-    private boolean cheeseAdded = false;
-    private boolean toppingsAdded = false;
-    private boolean bagAdded = false;
+    private boolean cheeseAdded;
+    private boolean toppingsAdded;
+    private boolean bagAdded;
 
     public Pizza(Boolean isVeg){
         this.isVeg = isVeg;
-        // your code goes here
-        if(isVeg){
-            price = vegBasePrice;
-            toppings = toppingsPriceVeg;
-            total = vegBasePrice;
-        }
-        else{
-            price = nonVegBasePrice;
-            toppings = toppingsPriceNonVeg;
-            total = nonVegBasePrice;
-        }
+        this.basePrice = isVeg? vegBasePrice : nonVegBasePrice;
+        this.toppings = isVeg ? toppingsPriceVeg : toppingsPriceNonVeg;
+        this.price = basePrice;
+        this.bill = "";
+        this.cheeseAdded = false;
+        this.toppingsAdded = false;
+        this.bagAdded = false;
     }
 
     public int getPrice(){
@@ -39,28 +35,28 @@ public class Pizza {
     }
 
     public void addExtraCheese(){
-        if(cheeseAdded == false){
-            total += cheesePrice;
+        if(!cheeseAdded){
+            this.price += cheesePrice;
             cheeseAdded = true;
         }
     }
 
     public void addExtraToppings(){
-        if(toppingsAdded == false){
-            total += toppings;
+        if(!toppingsAdded){
+            this.price += toppings;
             toppingsAdded = true;
         }
     }
 
     public void addTakeaway(){
-        if(bagAdded == false){
-            total += bagPrice;
+        if(!bagAdded){
+            this.price += bagPrice;
             bagAdded = true;
         }
     }
 
     public String getBill(){
-        bill = "Base Price Of The Pizza: "+price+"\n";
+        bill += "Base Price Of The Pizza: "+basePrice+"\n";
         if(cheeseAdded) {
             bill = bill + "Extra Cheese Added: " + cheesePrice + "\n";
         }
@@ -71,7 +67,7 @@ public class Pizza {
             bill = bill + "Paperbag Added: " + bagPrice + "\n";
         }
 
-        bill = bill + "Total Price: "+total;
+        bill = bill + "Total Price: "+price;
 
         return this.bill;
     }
